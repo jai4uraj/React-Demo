@@ -8,10 +8,15 @@ module.exports = function(config) {
     basePath: '',
 
 
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+      plugins: [
+          'karma-browserify',
+          'karma-jasmine',
+          'karma-chrome-launcher'
+      ],
 
+      // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: ['browserify', 'jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -21,17 +26,37 @@ module.exports = function(config) {
         'test/ArtistSpec.js'
     ],
 
+      loader: ['babel-loader'],
+
+      include: [
+          'src',
+          'test'
+      ],
+
+      exclude: ['node_modules'],
 
     // list of files to exclude
-    exclude: [
+    /*exclude: [
     ],
-
+*/
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
+    /*preprocessors: {
     },
+*/
 
+      preprocessors: {
+          './**/*.js': ['browserify']
+      },
+      browserify: {
+          debug: true,
+          configure: function browserify(bundle) {
+              bundle.once('prebundle', function prebundle() {
+                  bundle.transform('babelify', {presets: ['es2015', 'react']});
+              });
+          }
+      },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -49,7 +74,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
