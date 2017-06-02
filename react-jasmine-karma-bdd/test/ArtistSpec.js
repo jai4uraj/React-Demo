@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import React from 'react/lib/ReactTestUtils';
+import TestUtils from 'react/lib/ReactTestUtils';
+import TestUtils from 'react/lib/react-addons-test-utils';
 import Artist from '../src/Artist';
 
 
@@ -11,7 +12,8 @@ describe('Artist', () => {
 
     beforeEach( () => {
         component = TestUtils.renderIntoDocument(<Artist name="Dhananjay"/>)
-        });
+    });
+
     it("Should display the correct Artist Name", () => {
         expect(component.getDOMNode().textContent).toMatch(/Artist name: Dhananjay K/);
     });

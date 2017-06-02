@@ -27,10 +27,8 @@ gulp.task('default', function () {
             .on('error', gutil.log.bind(gutil, 'Browserify Error'))
             .pipe(source('bundle.js'))
             .pipe(gulp.dest('./dist'));
-    };
+    }
     build();
     bundler.on('update', build);
 
-})
-
-// { presets: [["es2015", "react"]] }
+});
