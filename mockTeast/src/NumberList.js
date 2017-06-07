@@ -4,55 +4,55 @@
 import React, {Component} from 'react';
 
 class NumberList extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state = {num : ''}
+        this.state = {num: ''}
     }
 
     isValidNumber(num) {
         var result = true;
-        if(isNaN(num)){
+        if (isNaN(num)) {
             result = false;
         }
-        if(num <= 0){
+        if (num <= 0) {
             result = false;
         }
-        if(!(parseInt(num) == parseFloat(num))){
+        if (!(parseInt(num) == parseFloat(num))) {
             result = false;
         }
         return result;
     }
 
-    arrangeNumbers(n){
+    arrangeNumbers(n) {
         var inputArray = n.split(',');
         var evenNumList = [];
         var oddNumList = [];
-            for(var i= 1; i<inputArray.length; i++) {
-                if (this.isValidNumber(inputArray[i])) {
-                    if ((inputArray[i] % 2) == 0) {
-                        var even = evenNumList.push(inputArray[i]);
-                    }
-                    else {
-                        var odd = oddNumList.push(inputArray[i]);
-                    }
+        for (var i = 1; i < inputArray.length; i++) {
+            if (this.isValidNumber(inputArray[i])) {
+                if ((inputArray[i] % 2) == 0) {
+                    var even = evenNumList.push(inputArray[i]);
                 }
                 else {
-                    return false;
+                    var odd = oddNumList.push(inputArray[i]);
                 }
             }
-            var retrunobj = {};
-            retrunobj.even = evenNumList.join();
-            retrunobj.odd = oddNumList.join();
-            return retrunobj;
+            else {
+                return false;
+            }
+        }
+        var retrunobj = {};
+        retrunobj.even = evenNumList.join();
+        retrunobj.odd = oddNumList.join();
+        return retrunobj;
     }
 
     render() {
 
         var number = this.state.num;
-        var result= '';
-        if (number != ''){
+        var result = '';
+        if (number != '') {
             result = this.arrangeNumbers(number);
-         }
+        }
         return (
             <div class="jumbotron">
                 <h1>Hello, React!</h1>
@@ -63,5 +63,3 @@ class NumberList extends Component {
         );
     }
 }
-
-export default NumberList;
