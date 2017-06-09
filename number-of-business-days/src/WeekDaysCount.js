@@ -83,10 +83,10 @@ class WeekDaysCount extends Component {
         var startdate = '07/06/2017';
         var enddate = '30/06/2017';
         if (this.validateDate(startdate) && this.validateDate(enddate) && startdate < enddate) {
-
+           var datediff =  enddate - startdate
+            console.log(datediff);
         }
     }
-
 
     render() {
         var comingDate = this.state.date;
